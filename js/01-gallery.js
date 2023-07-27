@@ -1,5 +1,5 @@
 import { galleryItems } from "./gallery-items.js";
-// import * as basicLightbox from "basiclightbox";
+
 // Change code below this line
 
 console.log(galleryItems);
@@ -30,23 +30,21 @@ function createImageListMarkup(galleryItems) {
 
 function onClickGetLargeImage(event) {
   event.preventDefault();
-  // window.addEventListener("keydown", onEscClick);
+  window.addEventListener("keydown", onEscClick);
   const imgOriginalEl = event.target.dataset.source;
   console.log(imgOriginalEl);
   const instance = basicLightbox.create(`<img src="${imgOriginalEl}">`);
   instance.show();
 }
 
-// function onEscClick(event) {
-//   if (event.code === "Escape") {
-//     onModalClose();
-//   }
-// }
+function onEscClick(event) {
+  if (event.code === "Escape") {
+    onModalClose();
+  }
+}
 
-// function onModalClose() {
-//   window.removeEventListener("keydown", onEscClick);
-//   const imgOriginalEl = galleryItems.original;
-//   console.log(imgOriginalEl);
-//   const instance = basicLightbox.create(`<img src="${imgOriginalEl}">`);
-//   instance.close();
-// }
+function onModalClose() {
+  window.removeEventListener("keydown", onEscClick);
+ 
+  instance.close(); - ????????????????
+}
