@@ -30,21 +30,29 @@ function createImageListMarkup(galleryItems) {
 
 function onClickGetLargeImage(event) {
   event.preventDefault();
+
   window.addEventListener("keydown", onEscClick);
   const imgOriginalEl = event.target.dataset.source;
-  console.log(imgOriginalEl);
-  const instance = basicLightbox.create(`<img src="${imgOriginalEl}">`);
-  instance.show();
+
+  const instance = basicLightbox.create(`<img src="${imgOriginalEl}">`, {
+    onShow: (instance) => {
+      instance.show();
+    },
+    onClose: (instance) => {
+      instance.close();
+    },
+  });
+  onShow();
 }
 
 function onEscClick(event) {
   if (event.code === "Escape") {
+    window.removeEventListener("keydown", onEscClick);
     onModalClose();
   }
 }
 
 function onModalClose() {
   window.removeEventListener("keydown", onEscClick);
- 
-  instance.close(); - ????????????????
+  onClose();
 }
