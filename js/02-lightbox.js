@@ -9,8 +9,6 @@ const createdImagesMarkup = createImageListMarkup(galleryItems);
 
 imagesList.insertAdjacentHTML("beforeend", createdImagesMarkup);
 
-imagesList.addEventListener("click", onClickGetLargeImage);
-
 function createImageListMarkup(galleryItems) {
   return galleryItems
     .map(({ preview, original, description }) => {
@@ -25,16 +23,13 @@ function createImageListMarkup(galleryItems) {
     .join("");
 }
 
-function onClickGetLargeImage(event) {
-  event.preventDefault();
-  const lightbox = new SimpleLightbox(".gallery a", {
-    sourceAttr: "href",
-    captions: true,
-    captionSelector: "img",
-    captionType: "attr",
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionClass: "",
-    captionDelay: 250,
-  });
-}
+const lightbox = new SimpleLightbox(".gallery a", {
+  sourceAttr: "href",
+  captions: true,
+  captionSelector: "img",
+  captionType: "attr",
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionClass: "",
+  captionDelay: 250,
+});
