@@ -36,13 +36,19 @@ function onClickGetLargeImage(event) {
   event.preventDefault();
   const imgOriginalEl = event.target.dataset.source;
 
-  const instance = basicLightbox.create(`<img src="${imgOriginalEl}">`);
+  const instance = basicLightbox.create(`<img src="${imgOriginalEl}">`, {
+    onShow: () => {
+      imagesList.addEventListener("keydown", onModalKeyDown);
+    },
+    onClose: () => {
+      imagesList.removeEventListener("keydown", onModalKeyDown);
+    },
+  });
   instance.show();
 
-  imagesList.addEventListener("keydown", (event) => {
+  function onModalKeyDown(event) {
     if (event.code === "Escape") {
-      imagesList.removeEventListener("keydown", event);
       instance.close();
     }
-  });
+  }
 }
